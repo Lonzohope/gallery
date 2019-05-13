@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 from django.http  import HttpResponse,Http404
 import datetime as dt
+from .models import Image
 
 
 
@@ -10,8 +11,8 @@ def welcome(request):
 
 
 def photo_today(request):
-    date = dt.date.today()
-    return render(request, 'all-photo/today-photo.html', {"date": date,})
+    images = Image.objects.all()
+    return render(request, 'all-photo/today-photo.html', {"images": images})
 
 
 
@@ -35,7 +36,7 @@ def past_days_photo(request, past_date):
 def search_results(request):
     if 'category' in request.GET and request.GET["category"]:
         search_term = request.GET.get("category")
-        searched_categories = Category.search_by_title(search_term)
+        searched_images = IMage.search_by_image_category(search_term)
         message = f"{search_term}"
 
         return render(request, 'all-photo/search.html',{"message":message,"categories": searched_categories})
