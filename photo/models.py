@@ -22,6 +22,8 @@ class Images(models.Model):
     def __str__(self):
         return self.image
 
+    def save_editor(self):
+        self.save()
     
     class Meta:
         ordering = ['image']
