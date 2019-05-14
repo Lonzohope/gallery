@@ -36,10 +36,10 @@ def past_days_photo(request, past_date):
 def search_results(request):
     if 'category' in request.GET and request.GET["category"]:
         search_term = request.GET.get("category")
-        searched_images = IMage.search_by_image_category(search_term)
+        searched_images = Image.search_by_image_category(search_term)
         message = f"{search_term}"
 
-        return render(request, 'all-photo/search.html',{"message":message,"categories": searched_categories})
+        return render(request, 'all-photo/today-photo.html',{"message":message,"images": searched_images})
 
     else:
         message = "You haven't searched for any term"

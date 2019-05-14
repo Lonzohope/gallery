@@ -5,7 +5,8 @@ import datetime as dt
 class Location(models.Model):
     name = models.CharField(max_length = 25)
 
-    
+    def __str__(self):
+        return self.name
 
     def save_location(self):
         self.save()
@@ -13,6 +14,8 @@ class Location(models.Model):
 class Category(models.Model):
     name = models.CharField(max_length = 25)
 
+    def __str__(self):
+        return self.name
    
 
 class Image(models.Model):
@@ -37,5 +40,5 @@ class Image(models.Model):
 
     @classmethod
     def search_by_image_category(cls,search_term):
-        images = cls.objects.filter(image_icontains=search_terms)
+        images = cls.objects.filter(image__icontains=search_term)
         return images 
